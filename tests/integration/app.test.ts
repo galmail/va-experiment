@@ -16,6 +16,6 @@ describe("app", () => {
   it("answers: how cold is in Alaska?", async () => {
     const q = "how cold is in Alaska?";
     const theAnswer = await answer(q);
-    expect(theAnswer).toMatch(/I can only find the weather for/i);
+    expect(theAnswer).toMatch(/The current weather in your location is/i);
   });
 });
