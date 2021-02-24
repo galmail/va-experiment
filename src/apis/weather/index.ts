@@ -5,9 +5,13 @@ import { GeoLocation } from "../ip2location";
 const callMetaWeatherApi = (apiFn) => async (
   cityOrGeoLocation: CityOrLocation
 ) => {
-  const weather = await apiFn(cityOrGeoLocation);
-  if (!weather) return null;
-  return new Weather(weather);
+  let weather;
+  try {
+    weather = await apiFn(cityOrGeoLocation);
+  } catch (err) {
+    console.error(err.message);
+  }
+  if (weather) return new Weather(weather);
 };
 
 export const queryByLocation = callMetaWeatherApi(

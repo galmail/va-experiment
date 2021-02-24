@@ -1,13 +1,8 @@
 import { getWeatherData } from "./weatherEngine";
-
-const topics = ["weather"];
-
-const topicAssociatedWords = {
-  weather: ["weather", "hot", "cold", "warm", "temperature"],
-};
+import { topics, topicAssociatedWords } from "../consts";
 
 export const processQuestion = async (query: string) => {
-  let answer = "I don't know how to answer your question";
+  let answer = "Sorry, I don't know how to answer your question";
   const words = query
     .split(" ")
     .map((word) =>

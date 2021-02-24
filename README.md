@@ -24,6 +24,8 @@ Or directly using the CLI, for example:
 npm run ask "What is the weather in London?"
 ```
 
+Currently it only works for: London, New York, Paris and Madrid
+
 ## Tests
 
 There are unit and integration tests. Just run:

@@ -10,4 +10,16 @@ describe("nlp engine", () => {
     const theAnswer = await processQuestion(q);
     expect(weatherEngine.getWeatherData).toHaveBeenCalled();
   });
+
+  it("responds politely when it doesn't know the answer", async () => {
+    const q = "are there any aliens?";
+    spyOn(weatherEngine, "getWeatherData").and.returnValue(
+      Promise.resolve("this shouldn't even be called!")
+    );
+    const theAnswer = await processQuestion(q);
+    expect(weatherEngine.getWeatherData).not.toHaveBeenCalled();
+    expect(theAnswer).toMatch(
+      /Sorry, I don't know how to answer your question/i
+    );
+  });
 });

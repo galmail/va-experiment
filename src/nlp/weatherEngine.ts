@@ -1,8 +1,7 @@
 import * as ip from "what-is-my-ip-address";
 import { queryByLocation, queryByGeoLocation } from "../apis/weather";
 import { getLocationByIP } from "../apis/ip2location";
-
-const knownPlaces = ["London", "New York", "Paris", "Madrid", "Tel Aviv"];
+import { knownPlaces } from "../consts";
 
 export const getWeatherData = async (words: string[]) => {
   let city = await findLocation(words);
@@ -26,8 +25,9 @@ export const getWeatherData = async (words: string[]) => {
 };
 
 async function findLocation(words) {
+  const composedWords = handleComposedPlaces(words);
   for (const place of knownPlaces) {
-    if (words.includes(place.toLowerCase())) {
+    if (composedWords.includes(place.toLowerCase())) {
       return Promise.resolve(place);
     }
   }
@@ -38,4 +38,33 @@ async function findCurrentGeoLocation() {
   const ipv4 = await ip.v4();
   const getLocation = await getLocationByIP(ipv4);
   return getLocation;
+}
+
+// for example: New York is a composed word, so we want to join them together
+// at the moment, we handle only 2 composed words
+function handleComposedPlaces(words: string[]) {
+  const composedWords = [];
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const placeIdx = knownPlaces.findIndex((place) =>
+      place.toLowerCase().includes(word)
+    );
+    if (placeIdx < 0) {
+      composedWords.push(word);
+      continue;
+    }
+    const nextWord = words[i + 1];
+    const currentPlace = knownPlaces[placeIdx];
+    if (
+      !nextWord ||
+      !currentPlace.toLowerCase().includes(nextWord.toLowerCase())
+    ) {
+      composedWords.push(word);
+      continue;
+    }
+    // the place is composed
+    composedWords.push(currentPlace.toLowerCase());
+    i++; // skip the next word
+  }
+  return composedWords;
 }
