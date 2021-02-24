@@ -1,4 +1,4 @@
-import { answer } from "../src/app";
+import { answer } from "../../src/app";
 
 describe("app", () => {
   it("answers a question", async () => {
