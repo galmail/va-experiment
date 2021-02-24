@@ -9,5 +9,5 @@ answer(question)
     console.log(res);
   })
   .catch((err) => {
-    throw new Error(err);
+    console.error(err.message);
   });
