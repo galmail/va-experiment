@@ -1,4 +1,4 @@
-import { queryByLocation } from "../../../src/apis/weather";
+import { queryByLocation } from "../../src/apis/weather";
 
 describe("weather api", () => {
   it("queryByLocation in London", async () => {

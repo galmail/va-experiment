@@ -1,4 +1,4 @@
-import { queryByLocation } from "../../../src/apis/weather/metaWeather";
+import { queryByLocation } from "../../src/apis/weather/metaWeather";
 
 describe("metaWeather api", () => {
   it("queryByLocation in London", async () => {
