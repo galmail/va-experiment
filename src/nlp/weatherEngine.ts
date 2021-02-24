@@ -21,7 +21,7 @@ export const getWeatherData = async (words: string[]) => {
 
   return `
     The current weather in ${city} is ${weather.state}
-    with min temp of ${weather.minTemp} and max temp of ${weather.maxTemp}
+    with min temp of ${weather.minTemp} degrees and max temp of ${weather.maxTemp} degrees
   `;
 };
 
