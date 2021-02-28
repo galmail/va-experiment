@@ -1,5 +1,3 @@
-// api.ipstack.com/90.247.92.30?access_key=f1aedf3bfd1a97698419eacd33c14597&format=1
-
 const API = "http://api.ipstack.com";
 const ACCESS_KEY = process.env.IPSTACK_ACCESS_KEY;
 
